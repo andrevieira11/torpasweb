@@ -1,9 +1,10 @@
-name: Deploy Next.js
+name: Build and Push Docker
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build-and-push:
@@ -14,7 +15,7 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
@@ -30,6 +31,5 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
           push: true
           tags: ghcr.io/andrevieira11/torpasweb:latest
