@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div className="flex">
-      Hello World!!
+      A tua mãe!
     </div>
   );
 }
