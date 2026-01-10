@@ -37,6 +37,7 @@ jobs:
           tags: ghcr.io/andrevieira11/torpasweb:latest
           context: .
           file: ./Dockerfile
+          attest: false
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v1
