@@ -33,3 +33,17 @@ jobs:
         with:
           push: true
           tags: ghcr.io/andrevieira11/torpasweb:latest
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            docker pull ghcr.io/andrevieira11/torpasweb:latest
+            docker stop torpasweb || true
+            docker rm torpasweb || true
+            docker run -d --name torpasweb \
+              -p 3000:3000 \
+              ghcr.io/andrevieira11/torpasweb:latest
